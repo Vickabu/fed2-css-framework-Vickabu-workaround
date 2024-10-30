@@ -7,8 +7,10 @@ import {
   createPostElement,
   showNoPostsMessage,
 } from "../../utilities/createPostElement";
+import { createNavbar } from "../../utilities/navbar";
 
 authGuard();
+createNavbar();
 setLogoutListener();
 
 /**

@@ -1,6 +1,15 @@
-@import url(_reset.css);
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-body {
+
+
+
+
+
+/* @import url(_reset.css); */
+
+/* body {
     background-color: #b4a5c7;
 }
 
@@ -77,4 +86,4 @@ input {
 
 .profile img {
     max-width: 120px;
-}
+} */
