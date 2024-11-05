@@ -35,7 +35,6 @@ export function createNavbar() {
     "items-center",
     "focus:outline-none",
     "z-50",
-    "bg-gray-800",
     "p-2",
     "rounded",
     "hover:bg-gray-700",
@@ -70,7 +69,13 @@ export function createNavbar() {
     const link = document.createElement("a");
     link.href = linkData.href;
     link.textContent = linkData.text;
-    link.classList.add("hover:underline", "text-white");
+    link.classList.add(
+      "hover:underline",
+      "text-white",
+      "hover:bg-gray-700",
+      "rounded",
+      "p-2"
+    );
     nav.appendChild(link);
   });
 
@@ -78,12 +83,13 @@ export function createNavbar() {
   logoutButton.id = "logoutButton";
   logoutButton.textContent = "Logout";
   logoutButton.classList.add(
-    "bg-blue-500",
+    "bg-orange-800",
     "text-white",
     "font-bold",
     "py-2",
     "px-4",
-    "rounded"
+    "rounded",
+    "hover:underline"
   );
   nav.appendChild(logoutButton);
 
@@ -105,7 +111,15 @@ export function createNavbar() {
     const link = document.createElement("a");
     link.href = linkData.href;
     link.textContent = linkData.text;
-    link.classList.add("block", "hover:underline", "w-full", "text-center");
+    link.classList.add(
+      "block",
+      "hover:underline",
+      "w-full",
+      "text-center",
+      "hover:bg-gray-700",
+      "rounded",
+      "p-2"
+    );
     mobileMenu.appendChild(link);
   });
 
@@ -113,12 +127,10 @@ export function createNavbar() {
   logoutButtonMobile.id = "logoutButtonMobile";
   mobileMenu.appendChild(logoutButtonMobile);
 
-  header.appendChild(mobileMenu); // Legg til mobilmeny i header
+  header.appendChild(mobileMenu);
 
-  // Legg navbaren til i dokumentet
   document.body.insertAdjacentElement("afterbegin", header);
 
-  // Legg til logikk for hamburgermenyen
   hamburgerButton.addEventListener("click", () => {
     mobileMenu.classList.toggle("hidden");
   });

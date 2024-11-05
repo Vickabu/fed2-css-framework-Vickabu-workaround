@@ -4,8 +4,10 @@ import { getLoggedInUserName } from "../../utilities/loggedInUser";
 import { setLogoutListener } from "../../ui/global/logout";
 import { authGuard } from "../../utilities/authGuard";
 import { createPostElement } from "../../utilities/createPostElement";
+import { createNavbar } from "../../utilities/navbar";
 
 authGuard();
+createNavbar();
 setLogoutListener();
 
 const postId = JSON.parse(localStorage.getItem("postId"));

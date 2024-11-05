@@ -7,8 +7,10 @@ import {
   createEditButton,
 } from "../../utilities/createButton";
 import { onDeletePost } from "../../ui/post/delete";
+import { createNavbar } from "../../utilities/navbar";
 
 authGuard();
+createNavbar();
 setLogoutListener();
 
 const userInfo = JSON.parse(localStorage.getItem("userInfo"));

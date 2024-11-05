@@ -1,8 +1,11 @@
 import { onLogin } from "../../ui/auth/login";
+import { createNavbar } from "../../utilities/navbar";
+
+createNavbar();
 
 /**
  * Sets up the event listener for the login form submission.
- * 
+ *
  * @returns {void}
  *
  * @example
@@ -11,9 +14,4 @@ import { onLogin } from "../../ui/auth/login";
  * ```
  */
 
-
 document.forms.login.addEventListener("submit", onLogin);
-
-
-
-
