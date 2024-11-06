@@ -56,14 +56,16 @@ async function loadProfile(name) {
 
 function displayProfile(profile) {
   const profileContainer = document.createElement("div");
-  profileContainer.classList.add("profile");
+  profileContainer.classList.add("bg-blue-200");
 
   const avatar = document.createElement("img");
   avatar.src = profile.avatar?.url;
   avatar.alt = profile.avatar?.alt || "User Avatar";
+  avatar.classList.add("w-60");
 
   const nameElement = document.createElement("h1");
   nameElement.textContent = profile.name;
+  nameElement.classList.add("font-bold");
 
   const bioElement = document.createElement("p");
   bioElement.textContent = profile.bio || "No bio available";
@@ -83,7 +85,17 @@ function displayProfile(profile) {
 
 function displayPosts(posts, loggedInUserName) {
   const postsContainer = document.createElement("div");
-  postsContainer.classList.add("posts-list");
+  postsContainer.classList.add(
+    "grid",
+    "grid-cols-1",
+    "md:grid-cols-2",
+    "lg:grid-cols-3",
+    "xl:grid-cols-4",
+    "gap-6",
+    "p-4",
+    "max-w-screen-xl",
+    "mx-auto"
+  );
 
   if (posts.length === 0) {
     postsContainer.innerHTML = "<p>No posts available.</p>";
@@ -107,7 +119,12 @@ function displayPosts(posts, loggedInUserName) {
 
 function createPostElement(post) {
   const postElement = document.createElement("div");
-  postElement.classList.add("post");
+  postElement.classList.add(
+    "border",
+    "border-blue-400",
+    "text-center",
+    "font-bold"
+  );
 
   const titleElement = document.createElement("h2");
   titleElement.textContent = post.title;
@@ -118,16 +135,30 @@ function createPostElement(post) {
   const deleteButton = createDeleteButton(post.id, onDeletePost);
   const editButton = createEditButton(post.id);
 
-  postElement.append(editButton, deleteButton);
-  postElement.append(titleElement, bodyElement);
-
+  let image;
   if (post.media?.url) {
-    const image = document.createElement("img");
+    image = document.createElement("img");
     image.src = post.media.url;
     image.alt = post.media.alt || "Post image";
-    image.className = "postImage";
-    postElement.appendChild(image);
+    image.className = "postImage w-full h-auto rounded-sm mb-4";
   }
+
+  postElement.append(
+    titleElement,
+    image,
+    bodyElement,
+    editButton,
+    deleteButton
+  );
+  // postElement.append(titleElement, bodyElement);
+
+  // if (post.media?.url) {
+  //   const image = document.createElement("img");
+  //   image.src = post.media.url;
+  //   image.alt = post.media.alt || "Post image";
+  //   image.className = "postImage";
+  //   postElement.appendChild(image);
+  // }
 
   return postElement;
 }

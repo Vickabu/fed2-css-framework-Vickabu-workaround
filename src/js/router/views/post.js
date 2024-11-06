@@ -52,7 +52,7 @@ async function loadPost(postId) {
 
 function displayPost(post) {
   const postContainer = document.createElement("div");
-  postContainer.classList.add("post");
+  postContainer.classList.add("max-w-screen-lg", "mx-auto", "p-6");
   const postElement = createPostElement(post, loggedInUserName, onDeletePost);
   postContainer.appendChild(postElement);
   document.body.appendChild(postContainer);

@@ -3,9 +3,8 @@ import "@fortawesome/fontawesome-free/css/all.css";
 export function createNavbar() {
   const header = document.createElement("header");
   header.classList.add(
-    "bg-gray-800",
+    "bg-teal-950",
     "text-white",
-    "p-2",
     "flex",
     "flex-col",
     "md:flex-row",
@@ -22,9 +21,9 @@ export function createNavbar() {
   );
 
   const logo = document.createElement("img");
-  logo.src = "/images/noroff-logo.png";
-  logo.alt = "Noroff Logo";
-  logo.classList.add("logo", "w-40", "items-center", "ml-10");
+  logo.src = "/images/FluffSocial-logo2.png";
+  logo.alt = "Logo";
+  logo.classList.add("h-20", "items-center", "ml-5");
   topRow.appendChild(logo);
 
   const hamburgerButton = document.createElement("button");
@@ -58,11 +57,20 @@ export function createNavbar() {
     "justify-evenly"
   );
 
+  const isLoggedIn = localStorage.accessToken;
+
   const links = [
-    { href: "/profile/", text: "My Profile" },
-    { href: "/auth/login/", text: "Login" },
-    { href: "/auth/register/", text: "Register" },
-    { href: "/post/create/", text: "Create Post" },
+    { href: "/", text: "Home" },
+    ...(isLoggedIn
+      ? [
+          { href: "/profile/", text: "My Profile" },
+          { href: "/post/create/", text: "Create Post" },
+          { href: "/auth/register/", text: "Register" },
+        ]
+      : [
+          { href: "/auth/login/", text: "Login" },
+          { href: "/auth/register/", text: "Register" },
+        ]),
   ];
 
   links.forEach((linkData) => {
@@ -79,19 +87,21 @@ export function createNavbar() {
     nav.appendChild(link);
   });
 
-  const logoutButton = document.createElement("button");
-  logoutButton.id = "logoutButton";
-  logoutButton.textContent = "Logout";
-  logoutButton.classList.add(
-    "bg-orange-800",
-    "text-white",
-    "font-bold",
-    "py-2",
-    "px-4",
-    "rounded",
-    "hover:underline"
-  );
-  nav.appendChild(logoutButton);
+  if (isLoggedIn) {
+    const logoutButton = document.createElement("button");
+    logoutButton.id = "logoutButton";
+    logoutButton.textContent = "Logout";
+    logoutButton.classList.add(
+      "bg-orange-800",
+      "text-white",
+      "font-bold",
+      "py-2",
+      "px-4",
+      "rounded",
+      "hover:underline"
+    );
+    nav.appendChild(logoutButton);
+  }
 
   header.appendChild(nav);
 
@@ -123,9 +133,20 @@ export function createNavbar() {
     mobileMenu.appendChild(link);
   });
 
-  const logoutButtonMobile = logoutButton.cloneNode(true);
-  logoutButtonMobile.id = "logoutButtonMobile";
-  mobileMenu.appendChild(logoutButtonMobile);
+  if (isLoggedIn) {
+    const logoutButtonMobile = document.createElement("button");
+    logoutButtonMobile.textContent = "Logout";
+    logoutButtonMobile.classList.add(
+      "bg-orange-800",
+      "text-white",
+      "font-bold",
+      "py-2",
+      "px-4",
+      "rounded",
+      "hover:underline"
+    );
+    mobileMenu.appendChild(logoutButtonMobile);
+  }
 
   header.appendChild(mobileMenu);
 

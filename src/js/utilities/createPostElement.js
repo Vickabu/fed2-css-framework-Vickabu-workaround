@@ -16,15 +16,29 @@ import { createDeleteButton, createEditButton } from "./createButton";
 
 export function createPostElement(post, loggedInUserName, onDeletePost) {
   const postElement = document.createElement("div");
-  postElement.classList.add("post");
-
-  const heading = document.createElement("h2");
-  heading.textContent = post.title;
-  heading.style.cursor = "pointer";
-  heading.addEventListener("click", () => {
+  postElement.style.cursor = "pointer";
+  postElement.classList.add(
+    "bg-emerald-100",
+    "p-4",
+    "rounded-lg",
+    "shadow-lg",
+    "border",
+    "border-teal-950",
+    "hover:shadow-teal-950",
+    "transition-shadow",
+    "duration-200",
+    "max-w-screen-lg",
+    "w-full",
+    "px-4"
+  );
+  postElement.addEventListener("click", () => {
     window.location.href = `/post/?id=${post.id}`;
     localStorage.setItem("postId", JSON.stringify(post.id));
   });
+
+  const heading = document.createElement("h2");
+  heading.textContent = post.title;
+  heading.classList.add("font-bold", "text-center", "break-words");
 
   const content = document.createElement("p");
   content.textContent = post.body;
@@ -34,21 +48,24 @@ export function createPostElement(post, loggedInUserName, onDeletePost) {
 
   const metaInfoContainer = document.createElement("div");
   metaInfoContainer.innerHTML = `By ${authorName} | ${postDate}`;
+  metaInfoContainer.classList.add("text-center");
+
+  let image;
+  if (post.media?.url) {
+    image = document.createElement("img");
+    image.src = post.media.url;
+    image.alt = post.media.alt || "Post image";
+    image.className = "postImage w-full h-auto rounded-sm mb-4";
+  }
+
+  postElement.append(heading, metaInfoContainer);
+  if (image) postElement.append(image);
+  postElement.append(content);
 
   if (post.author?.name === loggedInUserName) {
     const deleteButton = createDeleteButton(post.id, onDeletePost);
     const editButton = createEditButton(post.id);
     postElement.append(deleteButton, editButton);
-  }
-
-  postElement.append(heading, content, metaInfoContainer);
-
-  if (post.media?.url) {
-    const image = document.createElement("img");
-    image.src = post.media.url;
-    image.alt = post.media.alt || "Post image";
-    image.className = "postImage";
-    postElement.appendChild(image);
   }
 
   return postElement;
