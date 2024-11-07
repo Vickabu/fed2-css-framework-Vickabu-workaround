@@ -53,12 +53,25 @@ async function loadProfile(name) {
 
 function displayProfile(profile) {
   const profileContainer = document.createElement("div");
-  profileContainer.classList.add("bg-blue-200");
+  profileContainer.classList.add(
+    "bg-lightGreen",
+    "p4",
+    "rounded-lg",
+    "shadow-lg",
+    "border",
+    "border-darkGreen",
+    "shadow-darkGreen",
+    "max-w-screen-md",
+    "w-full",
+    "mx-auto",
+    "text-center",
+    "align-center"
+  );
 
   const avatar = document.createElement("img");
   avatar.src = profile.avatar?.url;
   avatar.alt = profile.avatar?.alt || "User Avatar";
-  avatar.classList.add("w-60");
+  avatar.classList.add("w-40", "h-40", "rounded-full", "mx-auto", "mb-4");
 
   const nameElement = document.createElement("h1");
   nameElement.textContent = profile.name;
