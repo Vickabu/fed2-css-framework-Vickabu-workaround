@@ -2,19 +2,17 @@ import { readPostsByUser } from "../../api/post/read";
 import { setLogoutListener } from "../../ui/global/logout";
 import { authGuard } from "../../utilities/authGuard";
 import { readProfile } from "../../api/profile/read";
-import {
-  createDeleteButton,
-  createEditButton,
-} from "../../utilities/createButton";
-import { onDeletePost } from "../../ui/post/delete";
+import { createPostElement } from "../../utilities/createPostElement";
+import { getLoggedInUserName } from "../../utilities/loggedInUser";
 import { createNavbar } from "../../utilities/navbar";
+import { postsContainerStyles } from "../../utilities/postStyles";
+import { onDeletePost } from "../../ui/post/delete";
 
 authGuard();
 createNavbar();
 setLogoutListener();
 
-const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-const username = userInfo?.name;
+const username = getLoggedInUserName();
 if (username) {
   loadProfile(username);
 } else {
@@ -29,7 +27,6 @@ if (username) {
  * @function loadProfile
  * @param {string} name - The username of the profile to be loaded.
  */
-
 async function loadProfile(name) {
   try {
     const profile = await readProfile(name);
@@ -37,7 +34,7 @@ async function loadProfile(name) {
     if (profile) {
       displayProfile(profile);
       const posts = await readPostsByUser(name);
-      displayPosts(posts, profile.name);
+      displayPosts(posts);
     } else {
       console.error("Profile not found.");
       document.body.innerHTML = "<p>Profile not found.</p>";
@@ -79,86 +76,25 @@ function displayProfile(profile) {
  * If no posts are available, a message is shown.
  *
  * @param {Array<Object>} posts - An array of post objects to display.
- * @param {string} loggedInUserName - The name of the logged-in user.
  * @function displayPosts
  */
 
-function displayPosts(posts, loggedInUserName) {
+function displayPosts(posts) {
   const postsContainer = document.createElement("div");
-  postsContainer.classList.add(
-    "grid",
-    "grid-cols-1",
-    "md:grid-cols-2",
-    "lg:grid-cols-3",
-    "xl:grid-cols-4",
-    "gap-6",
-    "p-4",
-    "max-w-screen-xl",
-    "mx-auto"
-  );
+  postsContainer.classList.add(...postsContainerStyles);
 
   if (posts.length === 0) {
     postsContainer.innerHTML = "<p>No posts available.</p>";
   } else {
     posts.forEach((post) => {
-      const postElement = createPostElement(post, loggedInUserName);
+      const postElement = createPostElement(
+        post,
+        getLoggedInUserName(),
+        onDeletePost
+      );
       postsContainer.appendChild(postElement);
     });
   }
 
   document.body.appendChild(postsContainer);
-}
-
-/**
- * Creates a DOM element representing a single post, including its title, body, and action buttons.
- *
- * @param {Object} post - The post object containing post details.
- * @returns {HTMLElement} The HTML element representing the post.
- * @function createPostElement
- */
-
-function createPostElement(post) {
-  const postElement = document.createElement("div");
-  postElement.classList.add(
-    "border",
-    "border-blue-400",
-    "text-center",
-    "font-bold"
-  );
-
-  const titleElement = document.createElement("h2");
-  titleElement.textContent = post.title;
-
-  const bodyElement = document.createElement("p");
-  bodyElement.textContent = post.body;
-
-  const deleteButton = createDeleteButton(post.id, onDeletePost);
-  const editButton = createEditButton(post.id);
-
-  let image;
-  if (post.media?.url) {
-    image = document.createElement("img");
-    image.src = post.media.url;
-    image.alt = post.media.alt || "Post image";
-    image.className = "postImage w-full h-auto rounded-sm mb-4";
-  }
-
-  postElement.append(
-    titleElement,
-    image,
-    bodyElement,
-    editButton,
-    deleteButton
-  );
-  // postElement.append(titleElement, bodyElement);
-
-  // if (post.media?.url) {
-  //   const image = document.createElement("img");
-  //   image.src = post.media.url;
-  //   image.alt = post.media.alt || "Post image";
-  //   image.className = "postImage";
-  //   postElement.appendChild(image);
-  // }
-
-  return postElement;
 }

@@ -8,26 +8,27 @@ import { deletePost } from "../../api/post/delete";
  */
 
 export async function onDeletePost(event) {
-    const postId = event.target.dataset.postId; 
-    const postElement = event.target.closest('.post'); 
-    
-    if (!postId) {
-      console.error("Post ID not found.");
-      return;
+  const postId = event.target.dataset.postId;
+  const postElement = event.target.closest(".post");
+
+  if (!postId) {
+    console.error("Post ID not found.");
+    return;
   }
 
   if (confirm("Are you sure you want to delete this post?")) {
-      const success = await deletePost(postId);
+    const success = await deletePost(postId);
 
-      if (success) {
-          alert("Post deleted successfully.");
-          if (window.location.pathname.includes('post')) {
-              window.location.href = '/'; 
-          } else {
-              postElement?.remove(); 
-          }
+    if (success) {
+      alert("Post deleted successfully.");
+      postElement.remove();
+      if (window.location.pathname.includes("post")) {
+        window.location.href = "/";
       } else {
-          alert("Failed to delete the post.");
+        postElement?.remove();
       }
+    } else {
+      alert("Failed to delete the post.");
+    }
   }
 }

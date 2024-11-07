@@ -8,6 +8,7 @@ import {
   showNoPostsMessage,
 } from "../../utilities/createPostElement";
 import { createNavbar } from "../../utilities/navbar";
+import { postsContainerStyles } from "../../utilities/postStyles";
 
 authGuard();
 createNavbar();
@@ -46,16 +47,7 @@ async function loadAndDisplayPosts() {
 function createPostsContainer() {
   const container = document.createElement("div");
   container.id = "posts-list";
-  container.classList.add(
-    "grid",
-    "grid-cols-1",
-    // "sm:grid-cols-2",
-    // "lg:grid-cols-3",
-    "gap-4",
-    "p-4",
-    "max-w-screen-xl",
-    "mx-auto"
-  );
+  container.classList.add(...postsContainerStyles);
   document.body.appendChild(container);
   return container;
 }

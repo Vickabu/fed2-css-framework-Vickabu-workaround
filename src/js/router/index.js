@@ -2,7 +2,7 @@
 // In order to add additional pages, you will need to implement them below
 // You may change the behaviour or approach of this file if you choose
 
-document.body.classList.add("bg-teal-800");
+document.body.classList.add("bg-green");
 
 export default async function router(pathname = window.location.pathname) {
   switch (pathname) {

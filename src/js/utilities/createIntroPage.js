@@ -32,7 +32,7 @@ export function createIntroPage() {
   const loginButton = document.createElement("button");
   loginButton.textContent = "Login";
   loginButton.classList.add(
-    "bg-orange-800",
+    "bg-orange",
     "text-white",
     "font-bold",
     "py-2",

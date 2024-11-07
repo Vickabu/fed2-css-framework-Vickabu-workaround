@@ -1,4 +1,5 @@
 import { createDeleteButton, createEditButton } from "./createButton";
+import { postStyles } from "./postStyles";
 
 /**
  * Creates a DOM element representing a single post, including its title, body, metadata,
@@ -17,45 +18,33 @@ import { createDeleteButton, createEditButton } from "./createButton";
 export function createPostElement(post, loggedInUserName, onDeletePost) {
   const postElement = document.createElement("div");
   postElement.style.cursor = "pointer";
-  postElement.classList.add(
-    "bg-emerald-100",
-    "p-4",
-    "rounded-lg",
-    "shadow-lg",
-    "border",
-    "border-teal-950",
-    "hover:shadow-teal-950",
-    "transition-shadow",
-    "duration-200",
-    "max-w-screen-lg",
-    "w-full",
-    "px-4"
-  );
-  postElement.addEventListener("click", () => {
+  postElement.classList.add("post", ...postStyles.container);
+
+  const heading = document.createElement("h2");
+  heading.textContent = post.title;
+  heading.classList.add(...postStyles.heading);
+  heading.addEventListener("click", () => {
     window.location.href = `/post/?id=${post.id}`;
     localStorage.setItem("postId", JSON.stringify(post.id));
   });
 
-  const heading = document.createElement("h2");
-  heading.textContent = post.title;
-  heading.classList.add("font-bold", "text-center", "break-words");
-
   const content = document.createElement("p");
   content.textContent = post.body;
+  content.classList.add(...postStyles.content);
 
   const authorName = post.author?.name || "Unknown Author";
   const postDate = new Date(post.created).toLocaleDateString();
 
   const metaInfoContainer = document.createElement("div");
   metaInfoContainer.innerHTML = `By ${authorName} | ${postDate}`;
-  metaInfoContainer.classList.add("text-center");
+  metaInfoContainer.classList.add(...postStyles.metaInfoContainer);
 
   let image;
   if (post.media?.url) {
     image = document.createElement("img");
     image.src = post.media.url;
     image.alt = post.media.alt || "Post image";
-    image.className = "postImage w-full h-auto rounded-sm mb-4";
+    image.classList.add(...postStyles.image);
   }
 
   postElement.append(heading, metaInfoContainer);

@@ -3,7 +3,7 @@ import "@fortawesome/fontawesome-free/css/all.css";
 export function createNavbar() {
   const header = document.createElement("header");
   header.classList.add(
-    "bg-teal-950",
+    "bg-darkGreen",
     "text-white",
     "flex",
     "flex-col",
@@ -89,17 +89,8 @@ export function createNavbar() {
 
   if (isLoggedIn) {
     const logoutButton = document.createElement("button");
-    logoutButton.id = "logoutButton";
     logoutButton.textContent = "Logout";
-    logoutButton.classList.add(
-      "bg-orange-800",
-      "text-white",
-      "font-bold",
-      "py-2",
-      "px-4",
-      "rounded",
-      "hover:underline"
-    );
+    logoutButton.classList.add("logoutButton");
     nav.appendChild(logoutButton);
   }
 
@@ -136,15 +127,7 @@ export function createNavbar() {
   if (isLoggedIn) {
     const logoutButtonMobile = document.createElement("button");
     logoutButtonMobile.textContent = "Logout";
-    logoutButtonMobile.classList.add(
-      "bg-orange-800",
-      "text-white",
-      "font-bold",
-      "py-2",
-      "px-4",
-      "rounded",
-      "hover:underline"
-    );
+    logoutButtonMobile.classList.add("logoutButton");
     mobileMenu.appendChild(logoutButtonMobile);
   }
 

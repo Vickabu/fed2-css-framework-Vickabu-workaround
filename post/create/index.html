@@ -11,32 +11,34 @@
 <body>
 
   <h1>Create Post</h1>
-  <form name="createPost">
+  <form name="createPost" class="form-container">
     <div>
       <label for="title">Title</label>
-      <input type="text" name="title" placeholder="Post Title" required />
-    </div>
-
-    <div>
-      <label for="tags">Tag your post</label>
-      <input type="text" name="tags" placeholder="Tags (comma separated)" />
+      <input type="text" name="title" placeholder="Post Title" required class="form-input" />
     </div>
 
     <div>
       <label for="body">Content</label>
-      <textarea name="body" placeholder="Post Content" required></textarea>
+      <textarea name="body" placeholder="Post Content" required class="form-textarea"></textarea>
     </div>
 
     <div>
+      <label for="tags">Tag your post</label>
+      <input type="text" name="tags" placeholder="Tags (comma separated)" class="form-input" />
+    </div>
+
+
+
+    <div>
       <label for="mediaUrl">Image link</label>
-      <input type="text" name="mediaUrl" placeholder="Media URL" />
+      <input type="text" name="mediaUrl" placeholder="Media URL" class="form-input" />
     </div>
 
     <div>
       <label for="mediaUrl">Alt for image</label>
-      <input type="text" name="mediaAlt" placeholder="Use few words" />
+      <input type="text" name="mediaAlt" placeholder="Use few words" class="form-input" />
     </div>
-    <button type="submit">Create Post</button>
+    <button type="submit" class="form-button">Create Post</button>
   </form>
 </body>
 

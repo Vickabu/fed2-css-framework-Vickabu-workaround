@@ -5,6 +5,7 @@ import { setLogoutListener } from "../../ui/global/logout";
 import { authGuard } from "../../utilities/authGuard";
 import { createPostElement } from "../../utilities/createPostElement";
 import { createNavbar } from "../../utilities/navbar";
+import { postPageContainerStyles } from "../../utilities/postStyles";
 
 authGuard();
 createNavbar();
@@ -52,7 +53,7 @@ async function loadPost(postId) {
 
 function displayPost(post) {
   const postContainer = document.createElement("div");
-  postContainer.classList.add("max-w-screen-lg", "mx-auto", "p-6");
+  postContainer.classList.add(...postPageContainerStyles);
   const postElement = createPostElement(post, loggedInUserName, onDeletePost);
   postContainer.appendChild(postElement);
   document.body.appendChild(postContainer);

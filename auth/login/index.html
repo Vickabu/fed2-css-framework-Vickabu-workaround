@@ -1,29 +1,31 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Noroff FED2 JS2 CA</title>
-    <script type="module" src="/src/app.js"></script>
-  </head>
+<head>
+  <meta charset="UTF-8" />
 
-  <body>
-    
-    <h1>Login</h1>
-    <form name="login"> 
-      <div>
-        <label for="email">Email</label>
-        <input id="email" type="email" name="email" required />
-      </div>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Noroff FED2 JS2 CA</title>
+  <script type="module" src="/src/app.js"></script>
+</head>
 
-      <div>
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" required />
-      </div>
+<body>
 
-      <a href="/auth/register/">Register</a>
-      <button>Login</button>
-    </form>
-  </body>
+  <h1 class="font-bold text-center text-2xl p-4">Ready to Alpaka in?</h1>
+  <form name="login" class="form-container">
+    <div>
+      <label for="email">Email</label>
+      <input id="email" type="email" name="email" required class="form-input" />
+    </div>
+
+    <div>
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" required class="form-input" />
+    </div>
+
+    <button class="form-button">Login</button>
+    <a href="/auth/register/" class="form-link">Register</a>
+  </form>
+</body>
+
 </html>
