@@ -52,9 +52,14 @@ export function createPostElement(post, loggedInUserName, onDeletePost) {
   postElement.append(content);
 
   if (post.author?.name === loggedInUserName) {
+    const buttonContainer = document.createElement("div");
+    buttonContainer.classList.add(...postStyles.buttonContainer);
+
     const deleteButton = createDeleteButton(post.id, onDeletePost);
     const editButton = createEditButton(post.id);
-    postElement.append(deleteButton, editButton);
+
+    buttonContainer.append(deleteButton, editButton);
+    postElement.append(buttonContainer);
   }
 
   return postElement;

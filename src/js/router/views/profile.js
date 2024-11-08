@@ -5,7 +5,7 @@ import { readProfile } from "../../api/profile/read";
 import { createPostElement } from "../../utilities/createPostElement";
 import { getLoggedInUserName } from "../../utilities/loggedInUser";
 import { createNavbar } from "../../utilities/navbar";
-import { postsContainerStyles } from "../../utilities/postStyles";
+import { profilePostsContainerStyles } from "../../utilities/postStyles";
 import { onDeletePost } from "../../ui/post/delete";
 
 authGuard();
@@ -55,7 +55,7 @@ function displayProfile(profile) {
   const profileContainer = document.createElement("div");
   profileContainer.classList.add(
     "bg-lightGreen",
-    "rounded-lg",
+    "md:rounded-t-sm",
     "shadow-lg",
     "border",
     "border-darkGreen",
@@ -65,7 +65,7 @@ function displayProfile(profile) {
     "mx-auto",
     "text-center",
     "align-center",
-    "mt-6"
+    "md:mt-8"
   );
 
   if (profile.banner?.url) {
@@ -76,7 +76,7 @@ function displayProfile(profile) {
       "w-full",
       "h-60",
       "object-cover",
-      "rounded-t-lg",
+      "md:rounded-t-sm",
       "mb-4"
     );
     profileContainer.appendChild(banner);
@@ -128,7 +128,7 @@ function displayPosts(posts) {
   titleContainer.appendChild(line);
 
   const postsContainer = document.createElement("div");
-  postsContainer.classList.add(...postsContainerStyles, "mt-6");
+  postsContainer.classList.add(...profilePostsContainerStyles, "mt-6");
 
   if (posts.length === 0) {
     postsContainer.innerHTML = "<p>No posts available.</p>";

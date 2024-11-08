@@ -22,6 +22,9 @@ export default {
         sm: "4px",
         lg: "8px",
       },
+      borderColor: {
+        "dark-green-transparent": "rgba(4, 47, 46, 0.25)",
+      },
       boxShadow: {
         linkDeskTopShadow: "0 -3px 2px 0px rgba(38, 120, 113, 0.6)",
         shadowDarkGreen: "0px 4px 10px rgba(4, 47, 46, 0.6)",

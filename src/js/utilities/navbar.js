@@ -8,7 +8,8 @@ export function createNavbar() {
     "flex",
     "flex-col",
     "md:flex-row",
-    "items-center"
+    "items-center",
+    "justify-evenly"
   );
 
   const topRow = document.createElement("div");
@@ -23,7 +24,7 @@ export function createNavbar() {
   const logo = document.createElement("img");
   logo.src = "/images/FluffSocial-logo2.png";
   logo.alt = "Logo";
-  logo.classList.add("w-20", "md:w-40", "items-center", "ml-5");
+  logo.classList.add("w-20", "md:w-40", "items-center", "ml-10");
   topRow.appendChild(logo);
 
   const hamburgerButton = document.createElement("button");
@@ -48,16 +49,7 @@ export function createNavbar() {
   header.appendChild(topRow);
 
   const nav = document.createElement("nav");
-  nav.classList.add(
-    "hidden",
-    "md:flex",
-    "w-full",
-    "justify-evenly",
-    "max-w-screen-xl",
-    "text-center",
-    "mx-auto",
-    "gap-10"
-  );
+  nav.classList.add("hidden", "md:flex", "w-full", "gap-2");
 
   const isLoggedIn = localStorage.accessToken;
   const currentPath = window.location.pathname;
