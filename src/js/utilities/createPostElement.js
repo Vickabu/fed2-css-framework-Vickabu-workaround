@@ -45,6 +45,10 @@ export function createPostElement(post, loggedInUserName, onDeletePost) {
     image.src = post.media.url;
     image.alt = post.media.alt || "Post image";
     image.classList.add(...postStyles.image);
+    image.addEventListener("click", () => {
+      window.location.href = `/post/?id=${post.id}`;
+      localStorage.setItem("postId", JSON.stringify(post.id));
+    });
   }
 
   postElement.append(heading, metaInfoContainer);
