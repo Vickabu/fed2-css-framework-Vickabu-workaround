@@ -55,7 +55,6 @@ function displayProfile(profile) {
   const profileContainer = document.createElement("div");
   profileContainer.classList.add(
     "bg-lightGreen",
-    "p4",
     "rounded-lg",
     "shadow-lg",
     "border",
@@ -65,8 +64,23 @@ function displayProfile(profile) {
     "w-full",
     "mx-auto",
     "text-center",
-    "align-center"
+    "align-center",
+    "mt-6"
   );
+
+  if (profile.banner?.url) {
+    const banner = document.createElement("img");
+    banner.src = profile.banner.url;
+    banner.alt = profile.banner.alt || "User Banner";
+    banner.classList.add(
+      "w-full",
+      "h-60",
+      "object-cover",
+      "rounded-t-lg",
+      "mb-4"
+    );
+    profileContainer.appendChild(banner);
+  }
 
   const avatar = document.createElement("img");
   avatar.src = profile.avatar?.url;
@@ -79,6 +93,7 @@ function displayProfile(profile) {
 
   const bioElement = document.createElement("p");
   bioElement.textContent = profile.bio || "No bio available";
+  bioElement.classList.add("mb-4", "p-4");
 
   profileContainer.append(nameElement, avatar, bioElement);
   document.body.appendChild(profileContainer);
@@ -93,8 +108,27 @@ function displayProfile(profile) {
  */
 
 function displayPosts(posts) {
+  const titleContainer = document.createElement("div");
+  titleContainer.classList.add("text-center", "mb-6");
+
+  const title = document.createElement("h2");
+  title.textContent = "Your Fluffy Posts";
+  title.classList.add("text-3xl", "font-bold", "mb-2", "mt-4");
+
+  const line = document.createElement("div");
+  line.classList.add(
+    "max-w-screen-lg",
+    "h-1",
+    "bg-darkGreen",
+    "mx-auto",
+    "mb-4"
+  );
+
+  titleContainer.appendChild(title);
+  titleContainer.appendChild(line);
+
   const postsContainer = document.createElement("div");
-  postsContainer.classList.add(...postsContainerStyles);
+  postsContainer.classList.add(...postsContainerStyles, "mt-6");
 
   if (posts.length === 0) {
     postsContainer.innerHTML = "<p>No posts available.</p>";
@@ -109,5 +143,5 @@ function displayPosts(posts) {
     });
   }
 
-  document.body.appendChild(postsContainer);
+  document.body.append(titleContainer, postsContainer);
 }

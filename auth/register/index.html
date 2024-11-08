@@ -11,30 +11,31 @@
 
 <body>
 
-  <h1 class="font-bold text-center text-2xl p-4">Register New Fluffy User!</h1>
+  <div class="form-container">
+    <h1 class="form-heading">Register New Fluffy User!</h1>
+    <form name="register">
+      <div>
+        <label for="name">Name</label>
+        <input id="name" type="text" name="name" required maxlength="20" pattern="^[\w]+$"
+          title="Please enter a username using only letters and numbers" class="form-input" />
+      </div>
 
-  <form name="register" class="form-container">
-    <div>
-      <label for="name">Name</label>
-      <input id="name" type="text" name="name" required maxlength="20" pattern="^[\w]+$"
-        title="Please enter a username using only letters and numbers" class="form-input" />
-    </div>
+      <div>
+        <label for="email">Email</label>
+        <input id="email" type="email" name="email" required pattern="^[\w\-.]+@(stud\.)?noroff\.no$"
+          title="Please enter a valid noroff.no or stud.noroff.no address" class="form-input" />
+      </div>
 
-    <div>
-      <label for="email">Email</label>
-      <input id="email" type="email" name="email" required pattern="^[\w\-.]+@(stud\.)?noroff\.no$"
-        title="Please enter a valid noroff.no or stud.noroff.no address" class="form-input" />
-    </div>
-
-    <div>
-      <label for="password">Password</label>
-      <input type="password" name="password" id="password" required minlength="8" class="form-input" />
-    </div>
+      <div>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required minlength="8" class="form-input" />
+      </div>
 
 
-    <button class="form-button">Register</button>
-    <a href="/auth/login/" class="form-link">Login</a>
-  </form>
+      <button class="form-button">Register</button>
+      <a href="/auth/login/" class="form-link">Login</a>
+    </form>
+  </div>
 </body>
 
 </html>

@@ -10,36 +10,38 @@
 </head>
 
 <body>
-  <h1 class="text-center text-2xl">Edit Post</h1>
 
-  <form name="editPost" class="form-container">
-    <div>
-      <label for="title">Title</label>
-      <input type="text" name="title" placeholder="Post Title" required class="form-input" />
-    </div>
+  <div class="form-container">
+    <h1 class="form-heading">Edit Post</h1>
+    <form name="editPost">
+      <div>
+        <label for="title">Title</label>
+        <input type="text" name="title" placeholder="Post Title" required class="form-input" />
+      </div>
 
-    <div>
-      <label for="body">Content</label>
-      <textarea name="body" placeholder="Post Content" required class="form-textarea"></textarea>
-    </div>
+      <div>
+        <label for="body">Content</label>
+        <textarea name="body" placeholder="Post Content" required class="form-textarea"></textarea>
+      </div>
 
-    <div>
-      <label for="tags">Tag your post</label>
-      <input type="text" name="tags" placeholder="Tags (comma separated)" class="form-input" />
-    </div>
+      <div>
+        <label for="tags">Tag your post</label>
+        <input type="text" name="tags" placeholder="Tags (comma separated)" class="form-input" />
+      </div>
 
-    <div>
-      <label for="mediaUrl">Image link</label>
-      <input type="text" name="mediaUrl" placeholder="Media URL" class="form-input" />
-    </div>
+      <div>
+        <label for="mediaUrl">Image link</label>
+        <input type="text" name="mediaUrl" placeholder="Media URL" class="form-input" />
+      </div>
 
-    <div>
-      <label for="mediaUrl">Alt for image</label>
-      <input type="text" name="mediaAlt" placeholder="Use few words" class="form-input" />
-    </div>
+      <div>
+        <label for="mediaUrl">Alt for image</label>
+        <input type="text" name="mediaAlt" placeholder="Use few words" class="form-input" />
+      </div>
 
-    <button type="submit" class="form-button">Update Post</button>
-  </form>
+      <button type="submit" class="form-button">Update Post</button>
+    </form>
+  </div>
 </body>
 
 </html>

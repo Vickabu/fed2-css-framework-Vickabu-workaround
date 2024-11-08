@@ -11,21 +11,23 @@
 
 <body>
 
-  <h1 class="font-bold text-center text-2xl p-4">Ready to Alpaka in?</h1>
-  <form name="login" class="form-container">
-    <div>
-      <label for="email">Email</label>
-      <input id="email" type="email" name="email" required class="form-input" />
-    </div>
+  <div class="form-container">
+    <h1 class="form-heading">Ready to Alpaka in?</h1>
+    <form name="login">
+      <div>
+        <label for="email">Email</label>
+        <input id="email" type="email" name="email" required class="form-input" />
+      </div>
 
-    <div>
-      <label for="password">Password</label>
-      <input type="password" name="password" id="password" required class="form-input" />
-    </div>
+      <div>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required class="form-input" />
+      </div>
 
-    <button class="form-button">Login</button>
-    <a href="./auth/register/" class="form-link">Register</a>
-  </form>
+      <button class="form-button">Login</button>
+      <a href="/auth/register/" class="form-link">Register</a>
+    </form>
+  </div>
 </body>
 
 </html>

@@ -23,7 +23,7 @@ export function createNavbar() {
   const logo = document.createElement("img");
   logo.src = "/images/FluffSocial-logo2.png";
   logo.alt = "Logo";
-  logo.classList.add("h-20", "items-center", "ml-5");
+  logo.classList.add("w-20", "md:w-40", "items-center", "ml-5");
   topRow.appendChild(logo);
 
   const hamburgerButton = document.createElement("button");
@@ -36,7 +36,7 @@ export function createNavbar() {
     "z-50",
     "p-2",
     "rounded",
-    "hover:bg-gray-700",
+    "hover:bg-green",
     "mr-10"
   );
 
@@ -51,20 +51,23 @@ export function createNavbar() {
   nav.classList.add(
     "hidden",
     "md:flex",
-    "space-x-4",
-    "items-center",
     "w-full",
-    "justify-evenly"
+    "justify-evenly",
+    "max-w-screen-xl",
+    "text-center",
+    "mx-auto",
+    "gap-10"
   );
 
   const isLoggedIn = localStorage.accessToken;
+  const currentPath = window.location.pathname;
 
   const links = [
     { href: "/", text: "Home" },
     ...(isLoggedIn
       ? [
           { href: "/profile/", text: "My Profile" },
-          { href: "/post/create/", text: "Create Post" },
+          { href: "/post/create/", text: "Create Post+" },
           { href: "/auth/register/", text: "Register" },
         ]
       : [
@@ -80,10 +83,13 @@ export function createNavbar() {
     link.classList.add(
       "hover:underline",
       "text-white",
-      "hover:bg-gray-700",
+      "hover:shadow-linkDeskTopShadow",
       "rounded",
-      "p-2"
+      "p-4"
     );
+    if (linkData.href === currentPath) {
+      link.classList.add("shadow-linkDeskTopShadow", "font-bold", "text-white");
+    }
     nav.appendChild(link);
   });
 
@@ -105,7 +111,8 @@ export function createNavbar() {
     "space-y-4",
     "mt-8",
     "w-full",
-    "text-center"
+    "text-center",
+    "p-4"
   );
 
   links.forEach((linkData) => {
@@ -117,10 +124,17 @@ export function createNavbar() {
       "hover:underline",
       "w-full",
       "text-center",
-      "hover:bg-gray-700",
+      "hover:border-green",
+      "border",
       "rounded",
-      "p-2"
+      "border-transparent",
+      "p-2",
+      "text-md"
     );
+    if (linkData.href === currentPath) {
+      link.classList.add("border", "!border-green", "font-bold");
+    }
+
     mobileMenu.appendChild(link);
   });
 
@@ -137,5 +151,13 @@ export function createNavbar() {
 
   hamburgerButton.addEventListener("click", () => {
     mobileMenu.classList.toggle("hidden");
+
+    if (mobileMenu.classList.contains("hidden")) {
+      hamburgerIcon.classList.remove("fa-times");
+      hamburgerIcon.classList.add("fa-bars");
+    } else {
+      hamburgerIcon.classList.remove("fa-bars");
+      hamburgerIcon.classList.add("fa-times");
+    }
   });
 }
