@@ -1,29 +1,34 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Noroff FED2 JS2 CA</title>
-    <script type="module" src="/src/app.js"></script>
-  </head>
+<head>
+  <meta charset="UTF-8" />
 
-  <body>
-    
-    <h1>Login</h1>
-    <form name="login"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fluff Social</title>
+  <link rel="icon" href="../../public/images/favicon-32x32.png" type="image/png">
+  <script type="module" src="/src/app.js"></script>
+</head>
+
+<body>
+
+  <div class="form-container">
+    <h1 class="form-heading">Ready to Alpaka in?</h1>
+    <form name="login">
       <div>
         <label for="email">Email</label>
-        <input id="email" type="email" name="email" required />
+        <input id="email" type="email" name="email" required class="form-input" />
       </div>
 
       <div>
         <label for="password">Password</label>
-        <input type="password" name="password" id="password" required />
+        <input type="password" name="password" id="password" required class="form-input" />
       </div>
 
-      <a href="/auth/register/">Register</a>
-      <button>Login</button>
+      <button class="form-button">Login</button>
+      <a href="/auth/register/" class="form-link">Register</a>
     </form>
-  </body>
+  </div>
+</body>
+
 </html>

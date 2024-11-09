@@ -1,5 +1,8 @@
 import { readPost } from "../../api/post/read";
 import { onUpdatePost } from "../../ui/post/update";
+import { createNavbar } from "../../utilities/navbar";
+
+createNavbar();
 
 const postId = JSON.parse(localStorage.getItem("postId"));
 const editPostForm = document.forms["editPost"];

@@ -88,6 +88,7 @@ export async function readPostsByUser(name, limit = 12, page = 1, tag) {
       limit: limit.toString(),
       page: page.toString(),
       ...(tag && { tag: tag }),
+      _author: true,
     });
 
     const response = await fetch(

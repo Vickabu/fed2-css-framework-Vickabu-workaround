@@ -2,17 +2,17 @@ import { readPostsByUser } from "../../api/post/read";
 import { setLogoutListener } from "../../ui/global/logout";
 import { authGuard } from "../../utilities/authGuard";
 import { readProfile } from "../../api/profile/read";
-import {
-  createDeleteButton,
-  createEditButton,
-} from "../../utilities/createButton";
+import { createPostElement } from "../../utilities/createPostElement";
+import { getLoggedInUserName } from "../../utilities/loggedInUser";
+import { createNavbar } from "../../utilities/navbar";
+import { profilePostsContainerStyles } from "../../utilities/postStyles";
 import { onDeletePost } from "../../ui/post/delete";
 
 authGuard();
+createNavbar();
 setLogoutListener();
 
-const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-const username = userInfo?.name;
+const username = getLoggedInUserName();
 if (username) {
   loadProfile(username);
 } else {
@@ -27,7 +27,6 @@ if (username) {
  * @function loadProfile
  * @param {string} name - The username of the profile to be loaded.
  */
-
 async function loadProfile(name) {
   try {
     const profile = await readProfile(name);
@@ -35,7 +34,7 @@ async function loadProfile(name) {
     if (profile) {
       displayProfile(profile);
       const posts = await readPostsByUser(name);
-      displayPosts(posts, profile.name);
+      displayPosts(posts);
     } else {
       console.error("Profile not found.");
       document.body.innerHTML = "<p>Profile not found.</p>";
@@ -54,17 +53,48 @@ async function loadProfile(name) {
 
 function displayProfile(profile) {
   const profileContainer = document.createElement("div");
-  profileContainer.classList.add("profile");
+  profileContainer.classList.add(
+    "bg-lightGreen",
+    "md:rounded-t-sm",
+    "shadow-lg",
+    "border",
+    "border-darkGreen",
+    "shadow-darkGreen",
+    "max-w-screen-md",
+    "w-full",
+    "mx-auto",
+    "text-center",
+    "align-center",
+    "md:mt-8",
+    "font-bold"
+  );
+
+  if (profile.banner?.url) {
+    const banner = document.createElement("img");
+    banner.src = profile.banner.url;
+    banner.alt = profile.banner.alt || "User Banner";
+    banner.classList.add(
+      "w-full",
+      "h-60",
+      "object-cover",
+      "md:rounded-t-sm",
+      "mb-4"
+    );
+    profileContainer.appendChild(banner);
+  }
 
   const avatar = document.createElement("img");
   avatar.src = profile.avatar?.url;
   avatar.alt = profile.avatar?.alt || "User Avatar";
+  avatar.classList.add("w-40", "h-40", "rounded-full", "mx-auto", "mb-4");
 
   const nameElement = document.createElement("h1");
   nameElement.textContent = profile.name;
+  nameElement.classList.add("p-4");
 
   const bioElement = document.createElement("p");
   bioElement.textContent = profile.bio || "No bio available";
+  bioElement.classList.add("mb-4", "p-4");
 
   profileContainer.append(nameElement, avatar, bioElement);
   document.body.appendChild(profileContainer);
@@ -75,57 +105,44 @@ function displayProfile(profile) {
  * If no posts are available, a message is shown.
  *
  * @param {Array<Object>} posts - An array of post objects to display.
- * @param {string} loggedInUserName - The name of the logged-in user.
  * @function displayPosts
  */
 
-function displayPosts(posts, loggedInUserName) {
+function displayPosts(posts) {
+  const titleContainer = document.createElement("div");
+  titleContainer.classList.add("text-center", "mb-6");
+
+  const title = document.createElement("h2");
+  title.textContent = "Your Fluffy Posts";
+  title.classList.add("text-3xl", "font-bold", "mb-2", "mt-4");
+
+  const line = document.createElement("div");
+  line.classList.add(
+    "max-w-screen-lg",
+    "h-1",
+    "bg-darkGreen",
+    "mx-auto",
+    "mb-4"
+  );
+
+  titleContainer.appendChild(title);
+  titleContainer.appendChild(line);
+
   const postsContainer = document.createElement("div");
-  postsContainer.classList.add("posts-list");
+  postsContainer.classList.add(...profilePostsContainerStyles, "mt-6");
 
   if (posts.length === 0) {
     postsContainer.innerHTML = "<p>No posts available.</p>";
   } else {
     posts.forEach((post) => {
-      const postElement = createPostElement(post, loggedInUserName);
+      const postElement = createPostElement(
+        post,
+        getLoggedInUserName(),
+        onDeletePost
+      );
       postsContainer.appendChild(postElement);
     });
   }
 
-  document.body.appendChild(postsContainer);
-}
-
-/**
- * Creates a DOM element representing a single post, including its title, body, and action buttons.
- *
- * @param {Object} post - The post object containing post details.
- * @returns {HTMLElement} The HTML element representing the post.
- * @function createPostElement
- */
-
-function createPostElement(post) {
-  const postElement = document.createElement("div");
-  postElement.classList.add("post");
-
-  const titleElement = document.createElement("h2");
-  titleElement.textContent = post.title;
-
-  const bodyElement = document.createElement("p");
-  bodyElement.textContent = post.body;
-
-  const deleteButton = createDeleteButton(post.id, onDeletePost);
-  const editButton = createEditButton(post.id);
-
-  postElement.append(editButton, deleteButton);
-  postElement.append(titleElement, bodyElement);
-
-  if (post.media?.url) {
-    const image = document.createElement("img");
-    image.src = post.media.url;
-    image.alt = post.media.alt || "Post image";
-    image.className = "postImage";
-    postElement.appendChild(image);
-  }
-
-  return postElement;
+  document.body.append(titleContainer, postsContainer);
 }

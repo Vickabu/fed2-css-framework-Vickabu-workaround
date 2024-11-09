@@ -1,4 +1,5 @@
 import { createDeleteButton, createEditButton } from "./createButton";
+import { postStyles } from "./postStyles";
 
 /**
  * Creates a DOM element representing a single post, including its title, body, metadata,
@@ -16,11 +17,12 @@ import { createDeleteButton, createEditButton } from "./createButton";
 
 export function createPostElement(post, loggedInUserName, onDeletePost) {
   const postElement = document.createElement("div");
-  postElement.classList.add("post");
+  postElement.style.cursor = "pointer";
+  postElement.classList.add("post", ...postStyles.container);
 
   const heading = document.createElement("h2");
   heading.textContent = post.title;
-  heading.style.cursor = "pointer";
+  heading.classList.add(...postStyles.heading);
   heading.addEventListener("click", () => {
     window.location.href = `/post/?id=${post.id}`;
     localStorage.setItem("postId", JSON.stringify(post.id));
@@ -28,27 +30,40 @@ export function createPostElement(post, loggedInUserName, onDeletePost) {
 
   const content = document.createElement("p");
   content.textContent = post.body;
+  content.classList.add(...postStyles.content);
 
   const authorName = post.author?.name || "Unknown Author";
   const postDate = new Date(post.created).toLocaleDateString();
 
   const metaInfoContainer = document.createElement("div");
   metaInfoContainer.innerHTML = `By ${authorName} | ${postDate}`;
+  metaInfoContainer.classList.add(...postStyles.metaInfoContainer);
 
-  if (post.author?.name === loggedInUserName) {
-    const deleteButton = createDeleteButton(post.id, onDeletePost);
-    const editButton = createEditButton(post.id);
-    postElement.append(deleteButton, editButton);
-  }
-
-  postElement.append(heading, content, metaInfoContainer);
-
+  let image;
   if (post.media?.url) {
-    const image = document.createElement("img");
+    image = document.createElement("img");
     image.src = post.media.url;
     image.alt = post.media.alt || "Post image";
-    image.className = "postImage";
-    postElement.appendChild(image);
+    image.classList.add(...postStyles.image);
+    image.addEventListener("click", () => {
+      window.location.href = `/post/?id=${post.id}`;
+      localStorage.setItem("postId", JSON.stringify(post.id));
+    });
+  }
+
+  postElement.append(heading, metaInfoContainer);
+  if (image) postElement.append(image);
+  postElement.append(content);
+
+  if (post.author?.name === loggedInUserName) {
+    const buttonContainer = document.createElement("div");
+    buttonContainer.classList.add(...postStyles.buttonContainer);
+
+    const deleteButton = createDeleteButton(post.id, onDeletePost);
+    const editButton = createEditButton(post.id);
+
+    buttonContainer.append(deleteButton, editButton);
+    postElement.append(buttonContainer);
   }
 
   return postElement;

@@ -1,43 +1,50 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Noroff FED2 JS2 CA</title>
-    <script type="module" src="/src/app.js"></script>
-  </head>
+<head>
+  <meta charset="UTF-8" />
 
-  <body>
-    <h1>Edit Post</h1>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fluff Social</title>
+  <link rel="icon" href="../../public/images/favicon-32x32.png" type="image/png">
+  <script type="module" src="/src/app.js"></script>
+</head>
 
-        <form name="editPost">
-          <div>
-            <label for="title">Title</label>
-            <input type="text" name="title" placeholder="Post Title" required />
-          </div>
-          
-          <div>
-          <label for="body">Content</label>
-          <textarea name="body" placeholder="Post Content" required></textarea>
-          </div>
+<body>
 
-          <div>
-            <label for="tags">Tag your post</label>
-            <input type="text" name="tags" placeholder="Tags (comma separated)" />
-          </div>
+  <div class="form-container">
+    <h1 class="form-heading">Edit Post</h1>
+    <form name="editPost">
+      <div>
+        <label for="title">Title</label>
+        <input type="text" name="title" placeholder="Post Title" required class="form-input" />
+      </div>
 
-          <div>
-            <label for="mediaUrl">Image link</label>
-            <input type="text" name="mediaUrl" placeholder="Media URL" />
-          </div>
+      <div>
+        <label for="body">Content</label>
+        <textarea name="body" placeholder="Post Content" required class="form-textarea" rows="4"></textarea>
+        <div id="charCount" class="text-right">0/280</div>
+        <div id="errorMessage" class="text-gray-900 hidden">Content cannot be longer than 280 characters!</div>
+      </div>
 
-          <div>
-            <label for="mediaUrl">Alt for image</label>
-            <input type="text" name="mediaAlt" placeholder="Use few words" />
-          </div>
-          
-          <button type="submit">Update Post</button>
-        </form>
-  </body>
+      <div>
+        <label for="tags">Tag your post</label>
+        <input type="text" name="tags" placeholder="Tags (comma separated)" class="form-input" />
+      </div>
+
+      <div>
+        <label for="mediaUrl">Image link</label>
+        <input type="text" name="mediaUrl" placeholder="Media URL" class="form-input" />
+      </div>
+
+      <div>
+        <label for="mediaUrl">Alt for image</label>
+        <input type="text" name="mediaAlt" placeholder="Use few words" class="form-input" />
+      </div>
+
+      <button type="submit" class="form-button">Update Post</button>
+    </form>
+  </div>
+</body>
+
 </html>

@@ -4,8 +4,11 @@ import { getLoggedInUserName } from "../../utilities/loggedInUser";
 import { setLogoutListener } from "../../ui/global/logout";
 import { authGuard } from "../../utilities/authGuard";
 import { createPostElement } from "../../utilities/createPostElement";
+import { createNavbar } from "../../utilities/navbar";
+import { postPageContainerStyles } from "../../utilities/postStyles";
 
 authGuard();
+createNavbar();
 setLogoutListener();
 
 const postId = JSON.parse(localStorage.getItem("postId"));
@@ -50,7 +53,7 @@ async function loadPost(postId) {
 
 function displayPost(post) {
   const postContainer = document.createElement("div");
-  postContainer.classList.add("post");
+  postContainer.classList.add(...postPageContainerStyles);
   const postElement = createPostElement(post, loggedInUserName, onDeletePost);
   postContainer.appendChild(postElement);
   document.body.appendChild(postContainer);

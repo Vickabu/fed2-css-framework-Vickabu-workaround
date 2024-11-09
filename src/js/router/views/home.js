@@ -7,8 +7,11 @@ import {
   createPostElement,
   showNoPostsMessage,
 } from "../../utilities/createPostElement";
+import { createNavbar } from "../../utilities/navbar";
+import { postsContainerStyles } from "../../utilities/postStyles";
 
 authGuard();
+createNavbar();
 setLogoutListener();
 
 /**
@@ -34,6 +37,7 @@ async function loadAndDisplayPosts() {
 
 /**
  * Creates a container for displaying posts and appends it to the document body.
+ * Adds Tailwind grid styling for a 3-column layout.
  *
  * @returns {HTMLElement} The created posts container element.
  *
@@ -43,6 +47,7 @@ async function loadAndDisplayPosts() {
 function createPostsContainer() {
   const container = document.createElement("div");
   container.id = "posts-list";
+  container.classList.add(...postsContainerStyles);
   document.body.appendChild(container);
   return container;
 }
