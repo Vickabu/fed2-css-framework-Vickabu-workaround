@@ -84,8 +84,8 @@ export function createNavbar() {
       "text-white",
       "hover:shadow-linkDeskTopShadow",
       "rounded",
-      "p-4",
-      "hover:scale-110"
+      "p-2",
+      "hover:scale-105"
     );
     if (linkData.href === currentPath) {
       link.classList.add("shadow-linkDeskTopShadow", "font-bold", "text-white");
