@@ -33,7 +33,7 @@ export async function login({ email, password }) {
 
     if (!response.ok) {
       const { message } = await response.json();
-      throw new Error(message || "Unknown error");
+      throw new Error(message || "Wrong credentials");
     }
 
     const { data } = await response.json();
