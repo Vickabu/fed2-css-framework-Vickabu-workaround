@@ -81,7 +81,6 @@ export function createNavbar() {
     link.href = linkData.href;
     link.textContent = linkData.text;
     link.classList.add(
-      "hover:font-bold",
       "text-white",
       "hover:shadow-linkDeskTopShadow",
       "rounded",
