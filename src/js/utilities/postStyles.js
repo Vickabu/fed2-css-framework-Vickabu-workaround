@@ -9,7 +9,7 @@ export const postStyles = {
     "border",
     "border-darkGreen",
     "hover:shadow-darkGreen",
-    "transition-shadow",
+    "transition-all",
     "duration-200",
     "max-w-screen-lg",
     "w-full",
@@ -19,6 +19,8 @@ export const postStyles = {
     "flex-col",
     "min-h-[300px]",
     "break-words",
+    "hover:scale-[1.01]",
+    "mx-auto",
   ],
   heading: [
     "font-bold",
@@ -67,9 +69,8 @@ export const profilePostsContainerStyles = [
 
 export const postPageContainerStyles = [
   "mt-6",
-  "max-w-screen-md",
+  "max-w-screen-lg",
   "mx-auto",
   "items-center",
   "justify-center",
-  "h-auto",
 ];

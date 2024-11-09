@@ -28,7 +28,8 @@ export function createDeleteButton(postId, onDeletePost) {
     "hover:bg-red-800",
     "transition-colors",
     "duration-200",
-    "mr-2"
+    "mr-2",
+    "hover:scale-110"
   );
 
   deleteButton.addEventListener("click", onDeletePost);
@@ -63,7 +64,8 @@ export function createEditButton(postId) {
     "rounded",
     "hover:bg-gray-600",
     "transition-colors",
-    "duration-200"
+    "duration-200",
+    "hover:scale-110"
   );
 
   editButton.addEventListener("click", () => {

@@ -46,8 +46,8 @@ export default {
           cursor: "pointer",
         },
         ".logoutButton:hover": {
-          textDecoration: "underline",
           backgroundColor: "#9a3412",
+          scale: "1.05",
         },
 
         ".form-heading": {

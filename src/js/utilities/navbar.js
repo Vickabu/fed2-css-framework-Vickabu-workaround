@@ -49,7 +49,15 @@ export function createNavbar() {
   header.appendChild(topRow);
 
   const nav = document.createElement("nav");
-  nav.classList.add("hidden", "md:flex", "w-full", "gap-2");
+  nav.classList.add(
+    "hidden",
+    "md:flex",
+    "w-full",
+    "gap-4",
+    "max-w-screen-sm",
+    "mr-10",
+    "justify-end"
+  );
 
   const isLoggedIn = localStorage.accessToken;
   const currentPath = window.location.pathname;
@@ -73,11 +81,12 @@ export function createNavbar() {
     link.href = linkData.href;
     link.textContent = linkData.text;
     link.classList.add(
-      "hover:underline",
+      "hover:font-bold",
       "text-white",
       "hover:shadow-linkDeskTopShadow",
       "rounded",
-      "p-4"
+      "p-4",
+      "hover:scale-110"
     );
     if (linkData.href === currentPath) {
       link.classList.add("shadow-linkDeskTopShadow", "font-bold", "text-white");

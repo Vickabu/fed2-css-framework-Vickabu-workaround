@@ -65,7 +65,8 @@ function displayProfile(profile) {
     "mx-auto",
     "text-center",
     "align-center",
-    "md:mt-8"
+    "md:mt-8",
+    "font-bold"
   );
 
   if (profile.banner?.url) {
@@ -89,7 +90,7 @@ function displayProfile(profile) {
 
   const nameElement = document.createElement("h1");
   nameElement.textContent = profile.name;
-  nameElement.classList.add("font-bold");
+  nameElement.classList.add("p-4");
 
   const bioElement = document.createElement("p");
   bioElement.textContent = profile.bio || "No bio available";
